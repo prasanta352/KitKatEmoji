@@ -1,10 +1,19 @@
 package com.sithagi.kitkatemoji.emoji;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
+ * Nature emoji icon sets.
+ *
  * @author Chathura Wijesinghe (cdanasiri@gmail.com)
  */
 public class Nature {
-    public static final Emojicon[] DATA = new Emojicon[]{
+    private Nature() {
+    }
+
+    protected static final List<Emojicon> DATA = Collections.unmodifiableList(Arrays.asList(
             Emojicon.fromCodePoint(0x1f436),
             Emojicon.fromCodePoint(0x1f43a),
             Emojicon.fromCodePoint(0x1f431),
@@ -120,6 +129,10 @@ public class Nature {
             Emojicon.fromCodePoint(0x1f300),
             Emojicon.fromCodePoint(0x1f301),
             Emojicon.fromCodePoint(0x1f308),
-            Emojicon.fromCodePoint(0x1f30a),
-    };
+            Emojicon.fromCodePoint(0x1f30a)
+    ));
+
+    public static Emojicon[] getData() {
+        return (Emojicon[]) DATA.toArray();
+    }
 }

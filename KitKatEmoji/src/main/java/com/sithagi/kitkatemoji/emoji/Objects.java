@@ -1,10 +1,19 @@
 package com.sithagi.kitkatemoji.emoji;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
+ * Object emoji icon sets.
+ *
  * @author Chathura Wijesinghe (cdanasiri@gmail.com)
  */
 public class Objects {
-    public static final Emojicon[] DATA = new Emojicon[]{
+    private Objects() {
+    }
+
+    protected static final List<Emojicon> DATA = Collections.unmodifiableList(Arrays.asList(
             Emojicon.fromCodePoint(0x1f38d),
             Emojicon.fromCodePoint(0x1f49d),
             Emojicon.fromCodePoint(0x1f38e),
@@ -93,7 +102,7 @@ public class Objects {
             Emojicon.fromCodePoint(0x1f4e7),
             Emojicon.fromCodePoint(0x1f4e5),
             Emojicon.fromCodePoint(0x1f4e4),
-            Emojicon.fromChar((char) 0x2709),
+            // Emojicon.fromChar((char) 0x2709),
             Emojicon.fromCodePoint(0x1f4e9),
             Emojicon.fromCodePoint(0x1f4e8),
             Emojicon.fromCodePoint(0x1f4ef),
@@ -117,11 +126,11 @@ public class Objects {
             Emojicon.fromCodePoint(0x1f4c7),
             Emojicon.fromCodePoint(0x1f4c1),
             Emojicon.fromCodePoint(0x1f4c2),
-            Emojicon.fromChar((char) 0x2702),
+            // Emojicon.fromChar((char) 0x2702),
             Emojicon.fromCodePoint(0x1f4cc),
             Emojicon.fromCodePoint(0x1f4ce),
-            Emojicon.fromChar((char) 0x2712),
-            Emojicon.fromChar((char) 0x270f),
+            // Emojicon.fromChar((char) 0x2712),
+            // Emojicon.fromChar((char) 0x270f),
             Emojicon.fromCodePoint(0x1f4cf),
             Emojicon.fromCodePoint(0x1f4d0),
             Emojicon.fromCodePoint(0x1f4d5),
@@ -234,6 +243,10 @@ public class Objects {
             Emojicon.fromCodePoint(0x1f360),
             Emojicon.fromCodePoint(0x1f346),
             Emojicon.fromCodePoint(0x1f345),
-            Emojicon.fromCodePoint(0x1f33d),
-    };
+            Emojicon.fromCodePoint(0x1f33d)
+    ));
+
+    public static Emojicon[] getData() {
+        return (Emojicon[]) DATA.toArray();
+    }
 }

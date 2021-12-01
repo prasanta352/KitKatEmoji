@@ -1,62 +1,55 @@
 package com.sithagi.kitkatemoji;
 
-
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.text.SpannableStringBuilder;
-import android.util.AttributeSet;
-import android.widget.TextView;
+import ohos.agp.components.AttrSet;
+import ohos.agp.components.Text;
+import ohos.app.Context;
 
 /**
- * @author Chathura Wijesinghe (cdanasiri@gmail.com)
+ * A custom text view to render emoji icon.
  */
-public class EmojiconTextView extends TextView {
+public class EmojiconTextView extends Text {
     private int mEmojiconSize;
 
+    //#region constructor
     public EmojiconTextView(Context context) {
         super(context);
         init(null);
     }
 
-    public EmojiconTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(attrs);
+    public EmojiconTextView(Context context, AttrSet attrSet) {
+        super(context, attrSet);
+        init(attrSet);
     }
 
-    public EmojiconTextView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        init(attrs);
+    public EmojiconTextView(Context context, AttrSet attrSet, String styleName) {
+        super(context, attrSet, styleName);
+        init(attrSet);
     }
+    //#endregion constructor
 
-    private void init(AttributeSet attrs) {
-        if (attrs == null) {
-            mEmojiconSize = (int) getTextSize();
-        } else {
-            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.EmojiEveryWhere);
-            mEmojiconSize = (int) a.getDimension(R.styleable.EmojiEveryWhere_emojiconSize, getTextSize());
-            a.recycle();
+    private void init(AttrSet attrSet) {
+        mEmojiconSize = getTextSize();
+        if (attrSet != null) {
+            attrSet.getAttr(EmojiconTextViewAttrsConstants.ATTR_EMOJI_ICON_SIZE)
+                    .ifPresent(attr -> mEmojiconSize = attr.getDimensionValue());
         }
-        setText(getText());
-    }
-
-    @Override
-    public void setText(CharSequence text, BufferType type) {
-        SpannableStringBuilder builder;
-
-        if (text != null)
-            builder = new SpannableStringBuilder(text);
-        else
-            builder = new SpannableStringBuilder("");
-
-
-        EmojiconHandler.addEmojis(getContext(), builder, mEmojiconSize);
-        super.setText(builder, type);
+        setTextSize(mEmojiconSize);
     }
 
     /**
      * Set the size of emojicon in pixels.
+     *
+     * @param pixels pixel
      */
     public void setEmojiconSize(int pixels) {
         mEmojiconSize = pixels;
+    }
+
+    /**
+     * custom attr constants.
+     */
+    private static class EmojiconTextViewAttrsConstants {
+        //if set to true, arrow will be shown on right side of the text
+        public static final String ATTR_EMOJI_ICON_SIZE = "emojiconSize";
     }
 }

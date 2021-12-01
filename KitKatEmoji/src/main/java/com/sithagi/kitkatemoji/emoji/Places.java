@@ -1,10 +1,19 @@
 package com.sithagi.kitkatemoji.emoji;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
+ * Places emoji icon sets.
+ *
  * @author Chathura Wijesinghe (cdanasiri@gmail.com)
  */
 public class Places {
-    public static final Emojicon[] DATA = new Emojicon[]{
+    private Places() {
+    }
+
+    protected static final List<Emojicon> DATA = Collections.unmodifiableList(Arrays.asList(
             Emojicon.fromCodePoint(0x1f3e0),
             Emojicon.fromCodePoint(0x1f3e1),
             Emojicon.fromCodePoint(0x1f3eb),
@@ -43,7 +52,7 @@ public class Places {
             Emojicon.fromCodePoint(0x1f6a3),
             Emojicon.fromChar((char) 0x2693),
             Emojicon.fromCodePoint(0x1f680),
-            Emojicon.fromChar((char) 0x2708),
+            // Emojicon.fromChar((char) 0x2708),
             Emojicon.fromCodePoint(0x1f4ba),
             Emojicon.fromCodePoint(0x1f681),
             Emojicon.fromCodePoint(0x1f682),
@@ -84,13 +93,13 @@ public class Places {
             Emojicon.fromCodePoint(0x1f3ab),
             Emojicon.fromCodePoint(0x1f6a6),
             Emojicon.fromCodePoint(0x1f6a5),
-            Emojicon.fromChar((char) 0x26a0),
+            // Emojicon.fromChar((char) 0x26a0),
             Emojicon.fromCodePoint(0x1f6a7),
             Emojicon.fromCodePoint(0x1f530),
             Emojicon.fromChar((char) 0x26fd),
             Emojicon.fromCodePoint(0x1f3ee),
             Emojicon.fromCodePoint(0x1f3b0),
-            Emojicon.fromChar((char) 0x2668),
+            // Emojicon.fromChar((char) 0x2668),
             Emojicon.fromCodePoint(0x1f5ff),
             Emojicon.fromCodePoint(0x1f3aa),
             Emojicon.fromCodePoint(0x1f3ad),
@@ -105,6 +114,10 @@ public class Places {
             Emojicon.fromChars("\ud83c\uddea\ud83c\uddf8"),
             Emojicon.fromChars("\ud83c\uddee\ud83c\uddf9"),
             Emojicon.fromChars("\ud83c\uddf7\ud83c\uddfa"),
-            Emojicon.fromChars("\ud83c\uddec\ud83c\udde7"),
-    };
+            Emojicon.fromChars("\ud83c\uddec\ud83c\udde7")
+    ));
+
+    public static Emojicon[] getData() {
+        return (Emojicon[]) DATA.toArray();
+    }
 }
