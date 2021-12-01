@@ -20,8 +20,12 @@ import com.sithagi.kitkatemoji.emoji.Objects;
 import com.sithagi.kitkatemoji.emoji.People;
 import com.sithagi.kitkatemoji.emoji.Places;
 import com.sithagi.kitkatemoji.emoji.Symbols;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * EmojiconsFraction.
@@ -70,8 +74,19 @@ public class EmojiconsFraction extends Fraction implements PageSlider.PageChange
         if (txt.isEmpty()) {
             return;
         }
-        String finalString = txt.substring(0, txt.length() - 1);
-        textField.setText(finalString);
+
+        StringBuilder finalString = new StringBuilder();
+        List<String> results = new ArrayList<>();
+        // split the string based on unicode character
+        Matcher m = Pattern.compile("\\P{M}\\p{M}*+").matcher(txt);
+        while (m.find()) {
+            results.add(m.group());
+        }
+        results.remove(results.size()-1);
+        results.forEach(finalString::append);
+
+
+        textField.setText(finalString.toString());
     }
 
     @Override
