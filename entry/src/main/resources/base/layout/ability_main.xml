@@ -2,68 +2,43 @@
 <DirectionalLayout
     xmlns:ohos="http://schemas.huawei.com/res/ohos"
     xmlns:custom="http://schemas.huawei.com/res/custom"
-    ohos:id="$+id:chatfragment_parent"
     ohos:height="match_parent"
     ohos:width="match_parent"
+    ohos:id="$+id:parentLayout"
     ohos:orientation="vertical">
 
-
     <DirectionalLayout
-        ohos:height="match_content"
-        ohos:width="match_parent"
-        ohos:background_element="#000"
-        ohos:orientation="horizontal"
+        ohos:weight="1"
+        ohos:height="0"
         ohos:padding="12fp"
-        >
-
+        ohos:alignment="center"
+        ohos:width="match_parent"
+        ohos:background_element="#000">
         <TextField
             ohos:id="$+id:txt_sentMessage"
             ohos:height="match_content"
-            ohos:width="0"
-            ohos:weight="1"
-            ohos:background_element="#FFFFB24A"
-            ohos:bottom_margin="8vp"
-            ohos:padding="12vp"
-            ohos:text="Click Here"
-            ohos:text_size="24fp"
-            />
-
-
-        <Button
-            ohos:id="$+id:openKeyboard"
-            ohos:height="match_content"
-            ohos:width="match_content"
+            ohos:width="match_parent"
             ohos:background_element="#fff"
-            ohos:margin="12vp"
+            ohos:text="Hello"
             ohos:padding="12vp"
-            ohos:text="openKeyboard"
-            ohos:text_size="24fp"
+            custom:emojiconSize="24fp"
             />
-
-        <Button
-            ohos:id="$+id:closeKeyboard"
-            ohos:height="match_content"
-            ohos:width="match_content"
-            ohos:background_element="#fff"
-            ohos:margin="12vp"
-            ohos:padding="12vp"
-            ohos:text="closeKeyboard"
-            ohos:text_size="24fp"
-
-            />
-
     </DirectionalLayout>
 
-    <Text
-        ohos:id="$+id:output"
+
+    <include
         ohos:height="match_content"
         ohos:width="match_parent"
-        ohos:background_element="#fff"
-        ohos:min_height="45vp"
-        ohos:text="Output:"
-        ohos:text_color="#000"
-        ohos:text_size="24fp"
-        ohos:top_margin="8vp"/>
+        ohos:layout="$layout:emoji_footer"/>
+
+
+    <DirectionalLayout
+        ohos:id="$+id:main_fraction"
+        ohos:height="250vp"
+        ohos:width="match_parent"
+        ohos:visibility="hide"
+        ohos:background_element="#FFFFEEAD"
+        />
 
 
 </DirectionalLayout>
