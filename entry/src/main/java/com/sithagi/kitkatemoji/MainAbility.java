@@ -1,24 +1,34 @@
 package com.sithagi.kitkatemoji;
 
+import static ohos.agp.window.service.WindowManager.LayoutConfig.INPUT_ADJUST_RESIZE;
 import ohos.aafwk.ability.fraction.FractionAbility;
 import ohos.aafwk.content.Intent;
 import ohos.agp.components.Component;
 import ohos.agp.components.DirectionalLayout;
 import ohos.agp.components.Image;
 import ohos.agp.components.TextField;
-import static ohos.agp.window.service.WindowManager.LayoutConfig.INPUT_ADJUST_RESIZE;
+import ohos.agp.utils.Rect;
+import ohos.hiviewdfx.HiLog;
+import ohos.hiviewdfx.HiLogLabel;
 
 
 /**
  * MainAbility.
  */
 public class MainAbility extends FractionAbility {
+    Image btnChatEmoji;
+    TextField messageTx;
     TextField messageEd;
+    DirectionalLayout parentLayout;
     DirectionalLayout emojiIconsCover;
     EmojiconsFraction emojiconsFraction;
-    TextField messageTx;
-    Image btnChatEmoji;
+    int screenHeight = 0;
+    int keyboardHeight = 0;
+    int previousHeightDifference = 0;
     boolean isEmojiKeyboardVisible = false;
+    boolean isDeviceKeyBoardVisible = false;
+
+
 
     @Override
     public void onStart(Intent intent) {
@@ -34,14 +44,19 @@ public class MainAbility extends FractionAbility {
         messageTx = (TextField) findComponentById(ResourceTable.Id_txt_sentMessage);
         emojiIconsCover = (DirectionalLayout) findComponentById(ResourceTable.Id_main_fraction);
         btnChatEmoji = (Image) findComponentById(ResourceTable.Id_btn_chat_emoji);
+        parentLayout = (DirectionalLayout) findComponentById(ResourceTable.Id_parentLayout);
         Image sendButton = (Image) findComponentById(ResourceTable.Id_btn_send);
 
-        messageEd.setClickedListener(component -> {
-            if (isEmojiKeyboardVisible) {
-                messageEd.clearFocus();
-            } else {
-                messageEd.requestFocus();
+        messageEd.setTouchEventListener((component, m) -> {
+            if (!isDeviceKeyBoardVisible && !isEmojiKeyboardVisible) {
+                showKeyBoard();
+                btnChatEmoji
+                        .setPixelMap(ResourceTable.Media_ic_vp_smileys);
+                emojiIconsCover
+                        .setVisibility(Component.HIDE);
+                isEmojiKeyboardVisible = false;
             }
+            return false;
         });
 
 
@@ -50,10 +65,9 @@ public class MainAbility extends FractionAbility {
             if (!chat.isEmpty()) {
                 messageTx.setText(chat);
                 messageEd.setText("");
-
             }
             if (isEmojiKeyboardVisible) {
-                changeEmojiLayout();
+                hideEmojiKeyboard();
             }
 
         });
@@ -66,26 +80,42 @@ public class MainAbility extends FractionAbility {
 
         getFractionManager().startFractionScheduler().add(ResourceTable.Id_main_fraction, emojiconsFraction)
                 .submit();
-
+        checkKeyboardHeight(parentLayout);
 
     }
 
 
+
+    private void hideEmojiKeyboard() {
+        btnChatEmoji
+                .setPixelMap(ResourceTable.Media_ic_vp_smileys);
+        emojiIconsCover
+                .setVisibility(Component.HIDE);
+        isEmojiKeyboardVisible = false;
+    }
+
+    private void showEmojiKeyboard() {
+        btnChatEmoji
+                .setPixelMap(ResourceTable.Media_ic_vp_keypad);
+        emojiIconsCover
+                .setVisibility(Component.VISIBLE);
+        isEmojiKeyboardVisible = true;
+    }
+
     protected void changeEmojiLayout() {
         if (isEmojiKeyboardVisible) {
-            btnChatEmoji
-                    .setPixelMap(ResourceTable.Media_ic_vp_smileys);
-            emojiIconsCover
-                    .setVisibility(Component.HIDE);
-            isEmojiKeyboardVisible = false;
-            showKeyBoard();
+            if (!isDeviceKeyBoardVisible) {
+                hideEmojiKeyboard();
+                showKeyBoard();
+            }
         } else {
-            btnChatEmoji
-                    .setPixelMap(ResourceTable.Media_ic_vp_keypad);
-            emojiIconsCover
-                    .setVisibility(Component.VISIBLE);
-            isEmojiKeyboardVisible = true;
-            hideKeyBoard();
+            if (isDeviceKeyBoardVisible) {
+                hideKeyBoard();
+                getUITaskDispatcher().delayDispatch(this::showEmojiKeyboard, 200);
+            } else {
+                hideKeyBoard();
+                showEmojiKeyboard();
+            }
         }
     }
 
@@ -98,5 +128,48 @@ public class MainAbility extends FractionAbility {
         messageEd.clearFocus();
     }
 
+    private void checkKeyboardHeight(final Component parentLayout) {
+        parentLayout.setLayoutRefreshedListener(c -> {
+            Rect r = new Rect();
+            parentLayout.getWindowVisibleRect(r);
 
+            if (screenHeight < r.getHeight()) {
+                screenHeight = r.getHeight();
+            }
+
+            int heightDifference = screenHeight - (r.bottom);
+
+            if (screenHeight == heightDifference) {
+                return;
+            }
+
+            if (previousHeightDifference - heightDifference > 50) {
+                btnChatEmoji.setPixelMap(ResourceTable.Media_ic_vp_smileys);
+                emojiIconsCover.setVisibility(Component.HIDE);
+            }
+            previousHeightDifference = heightDifference;
+
+            if (heightDifference > 100) {
+                isDeviceKeyBoardVisible = true;
+                changeKeyboardHeight(heightDifference);
+            } else {
+                isDeviceKeyBoardVisible = false;
+            }
+        });
+    }
+
+
+    /**
+     * change height of emoticons keyboard according to height of actual
+     * keyboard.
+     *
+     * @param height minimum height by which we can make sure actual keyboard is
+     *               open or not
+     */
+    private void changeKeyboardHeight(int height) {
+        if (height > 100) {
+            keyboardHeight = height;
+            emojiIconsCover.setHeight(height);
+        }
+    }
 }

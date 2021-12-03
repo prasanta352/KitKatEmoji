@@ -4,6 +4,7 @@
     xmlns:custom="http://schemas.huawei.com/res/custom"
     ohos:height="match_parent"
     ohos:width="match_parent"
+    ohos:id="$+id:parentLayout"
     ohos:orientation="vertical">
 
     <DirectionalLayout
