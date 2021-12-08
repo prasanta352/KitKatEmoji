@@ -57,7 +57,7 @@ checkstyle {
 
 sonarqube {
     properties {
-        property "sonar.projectKey", "applibgroup_HMOS-kitkatemoji"
+        property "sonar.projectKey", "applibgroup_KitKatEmoji"
         property "sonar.organization", "applibgroup"
         property "sonar.host.url", "https://sonarcloud.io/"
         property "sonar.java.checkstyle.reportPaths", "checkstyle.xml"
