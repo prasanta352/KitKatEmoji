@@ -43,7 +43,7 @@ allprojects {
         configFile file("config/checkstyle.xml")
 
         source 'entry/src/main/java'
-        source 'verticalstepperview/src/main/java'
+        source 'kitkatemoji/src/main/java'
         include '**/*.java'
 
         // empty classpath
