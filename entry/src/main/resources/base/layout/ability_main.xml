@@ -34,7 +34,7 @@
 
 
     <DirectionalLayout
-        ohos:id="$+id:main_fraction"
+        ohos:id="$+id:emoji_keyboard_fraction"
         ohos:height="250vp"
         ohos:width="match_parent"
         ohos:visibility="hide"

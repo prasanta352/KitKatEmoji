@@ -8,8 +8,6 @@ import ohos.agp.components.DirectionalLayout;
 import ohos.agp.components.Image;
 import ohos.agp.components.TextField;
 import ohos.agp.utils.Rect;
-import ohos.hiviewdfx.HiLog;
-import ohos.hiviewdfx.HiLogLabel;
 
 
 /**
@@ -42,7 +40,7 @@ public class MainAbility extends FractionAbility {
 
         messageEd = (TextField) findComponentById(ResourceTable.Id_edit_chat_message);
         messageTx = (TextField) findComponentById(ResourceTable.Id_txt_sentMessage);
-        emojiIconsCover = (DirectionalLayout) findComponentById(ResourceTable.Id_main_fraction);
+        emojiIconsCover = (DirectionalLayout) findComponentById(ResourceTable.Id_emoji_keyboard_fraction);
         btnChatEmoji = (Image) findComponentById(ResourceTable.Id_btn_chat_emoji);
         parentLayout = (DirectionalLayout) findComponentById(ResourceTable.Id_parentLayout);
         Image sendButton = (Image) findComponentById(ResourceTable.Id_btn_send);
@@ -78,7 +76,9 @@ public class MainAbility extends FractionAbility {
 
         emojiconsFraction.setOnEmojiIconBackspaceClickedListener(c -> emojiconsFraction.backspace(messageEd));
 
-        getFractionManager().startFractionScheduler().add(ResourceTable.Id_main_fraction, emojiconsFraction)
+        getFractionManager()
+                .startFractionScheduler()
+                .add(ResourceTable.Id_emoji_keyboard_fraction, emojiconsFraction)
                 .submit();
         checkKeyboardHeight(parentLayout);
 
