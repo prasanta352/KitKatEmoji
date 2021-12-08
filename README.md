@@ -3,7 +3,7 @@ KitKatEmoji
 
 Library for Emoji View like Hangouts, Emoji TextView and Emoji EditText
 
-![preview](assets/preview.mp4)
+![preview](assets/preview.gif)
 
 
 ### Source
