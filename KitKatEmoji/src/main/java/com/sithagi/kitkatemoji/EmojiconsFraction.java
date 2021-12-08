@@ -20,7 +20,6 @@ import com.sithagi.kitkatemoji.emoji.Objects;
 import com.sithagi.kitkatemoji.emoji.People;
 import com.sithagi.kitkatemoji.emoji.Places;
 import com.sithagi.kitkatemoji.emoji.Symbols;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -82,7 +81,7 @@ public class EmojiconsFraction extends Fraction implements PageSlider.PageChange
         while (m.find()) {
             results.add(m.group());
         }
-        results.remove(results.size()-1);
+        results.remove(results.size() - 1);
         results.forEach(finalString::append);
 
 
