@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:height="match_content"
+    ohos:width="match_parent"
+    ohos:orientation="horizontal"
+    >
+
+    <DirectionalLayout
+        ohos:height="match_parent"
+        ohos:width="0"
+        ohos:weight="0.14">
+
+        <Image
+            ohos:id="$+id:btn_chat_emoji"
+            ohos:width="48vp"
+            ohos:height="48vp"
+            ohos:scale_mode="zoom_center"
+            ohos:image_src="$media:ic_vp_smileys"
+            />
+    </DirectionalLayout>
+
+    <DirectionalLayout
+        ohos:height="match_parent"
+        ohos:width="0"
+        ohos:weight="0.72"
+        >
+
+        <TextField
+            ohos:id="$+id:edit_chat_message"
+            ohos:height="match_parent"
+            ohos:width="match_parent"
+            ohos:hint="$string:mainability_chat_message_type_hint"
+            ohos:max_height="48vp"
+            ohos:text=""
+            ohos:text_color="$color:black"
+            ohos:text_size="24fp"
+            ohos:text_alignment="vertical_center"
+            />
+    </DirectionalLayout>
+
+    <DirectionalLayout
+        ohos:height="match_parent"
+        ohos:width="0"
+        ohos:weight="0.14">
+
+        <Image
+            ohos:id="$+id:btn_send"
+            ohos:height="48vp"
+            ohos:width="48vp"
+            ohos:background_element="$media:ic_vp_send"
+            />
+    </DirectionalLayout>
+
+</DirectionalLayout>

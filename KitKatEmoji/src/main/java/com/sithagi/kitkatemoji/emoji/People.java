@@ -1,10 +1,19 @@
 package com.sithagi.kitkatemoji.emoji;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
+ * People icon emoji sets.
+ *
  * @author Chathura Wijesinghe (cdanasiri@gmail.com)
  */
 public class People {
-    public static final Emojicon[] DATA = new Emojicon[]{
+    private People() {
+    }
+
+    protected static final List<Emojicon> DATA = Collections.unmodifiableList(Arrays.asList(
             Emojicon.fromCodePoint(0x1f604),
             Emojicon.fromCodePoint(0x1f603),
             Emojicon.fromCodePoint(0x1f600),
@@ -193,6 +202,10 @@ public class People {
             Emojicon.fromCodePoint(0x1f465),
             Emojicon.fromCodePoint(0x1f4ac),
             Emojicon.fromCodePoint(0x1f463),
-            Emojicon.fromCodePoint(0x1f4ad),
-    };
+            Emojicon.fromCodePoint(0x1f4ad)
+    ));
+
+    public static Emojicon[] getData() {
+        return (Emojicon[]) DATA.toArray();
+    }
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    xmlns:custom="http://schemas.huawei.com/res/custom"
+    ohos:height="match_parent"
+    ohos:width="match_parent"
+    ohos:id="$+id:parentLayout"
+    ohos:orientation="vertical">
+
+    <DirectionalLayout
+        ohos:weight="1"
+        ohos:height="0"
+        ohos:padding="12fp"
+        ohos:alignment="center"
+        ohos:width="match_parent"
+        ohos:background_element="#000">
+
+        <TextField
+            ohos:id="$+id:txt_sentMessage"
+            ohos:height="match_content"
+            ohos:width="match_parent"
+            ohos:background_element="#fff"
+            ohos:text="Hello"
+            ohos:padding="12vp"
+            custom:emojiconSize="24fp"
+            />
+    </DirectionalLayout>
+
+
+    <include
+        ohos:height="match_content"
+        ohos:width="match_parent"
+        ohos:layout="$layout:emoji_footer"/>
+
+
+    <DirectionalLayout
+        ohos:id="$+id:emoji_keyboard_fraction"
+        ohos:height="250vp"
+        ohos:width="match_parent"
+        ohos:visibility="hide"
+        ohos:background_element="#FFFFEEAD"
+        />
+
+
+</DirectionalLayout>

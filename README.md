@@ -3,75 +3,62 @@ KitKatEmoji
 
 Library for Emoji View like Hangouts, Emoji TextView and Emoji EditText
 
-<img src="https://github.com/chathudan/KitKatEmoji/raw/dev/screens/Android_KitKat_Emojicons.gif" width="300" height="500">
+<img src="assets/preview.gif" height="500" /> 
 
+
+### Source
+---
+This library has been inspired by [chathudan/KitKatEmoji](https://github.com/chathudan/KitKatEmoji)
+
+### Integration
+---
+
+**From Source**
+1. For using KitKatEmoji module in sample app, include the source code and add the below dependencies in entry/build.gradle to generate hap/support.har.
+    ```groovy
+    implementation project(path: ':kitkatemoji')
+    ```
+2. For using KitKatEmoji module in separate application using har file, add the har file in the entry/libs folder and add the dependencies in entry/build.gradle file.
+    ```groovy
+   implementation fileTree(dir: 'libs', include: ['*.har'])
+   ```
 ## Usage
+ 
 
-#####Emojicon EditText
+```xml
+<!-- create a container to put the emojikeyboard -->
+ <DirectionalLayout
+        ohos:id="$+id:emoji_keyboard_fraction"
+        ohos:height="250vp"
+        ohos:width="match_parent"
+        ohos:visibility="hide"
+        ohos:background_element="#FFFFEEAD"
+        />
 
-
-
-```javascript
-<com.sithagi.kitkatemoji.EmojiconEditText
-                android:id="@+id/txt_sentMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                 />
 ```
 
-#####Emojicon EditText
-
-
-
-```javascript
-<com.sithagi.kitkatemoji.EmojiconEditText
-                android:id="@+id/txt_sentMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                 />
+```java
+// extends the FractionAbility
+public class MainAbility extends FractionAbility {  
+    @Override
+    void onStart(){
+        // create the emoji keyboard
+        EmojiconsFraction emojiconsFraction = new EmojiconsFraction(getContext());
+        // add listeners
+        emojiconsFraction.setOnEmojiIconClickedListener(emojicon -> emojiconsFraction.input(messageEd, emojicon));
+        
+        emojiconsFraction.setOnEmojiIconBackspaceClickedListener(c -> emojiconsFraction.backspace(messageEd));
+    
+        // add the emoji icon to the container
+        getFractionManager()
+                        .startFractionScheduler()
+                        .add(ResourceTable.Id_emoji_keyboard_fraction, emojiconsFraction)
+                        .submit();
+    }
+}
 ```
 
-
-#####Emojicon TextView
-
-
-
-```javascript
-<com.sithagi.kitkatemoji.EmojiconTextView
-                android:id="@+id/txt_sentMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                 />
-```
-
-
-#####EmojiView
-
-
-```javascript
-<LinearLayout
-        android:id="@+id/footer_for_emojiicons"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/keyboard_height"
-        android:background="@android:color/transparent"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <fragment
-            android:id="@+id/emojicons"
-            class="com.sithagi.kitkatemoji.EmojiconsFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:requiresFadingEdge="none"
-            tools:layout="@layout/emojicons" />
-    </LinearLayout>
-```
-
+for complete example please take a look at the [sample](entry) application.
 ## License
 
-KitKatEmoji is released under the <a href="https://raw.githubusercontent.com/chathudan/KitKatEmoji/dev/README.md">Apache License
-                           Version 2.0</a>.
+KitKatEmoji is released under the [Apache License Version 2.0](LICENSE.md).

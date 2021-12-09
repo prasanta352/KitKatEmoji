@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    xmlns:custom="http://schemas.huawei.com/res/custom"
+    ohos:height="match_parent"
+    ohos:width="match_parent"
+    ohos:orientation="vertical"
+>
+    <com.sithagi.kitkatemoji.EmojiconTextView
+        ohos:height="match_content"
+        ohos:width="match_content"
+        ohos:padding="8vp"
+        ohos:id="$+id:emoji_icon"
+        ohos:layout_alignment="center"
+        ohos:text_alignment="center"
+        custom:emojiconSize="30fp"
+
+        />
+
+</DirectionalLayout>

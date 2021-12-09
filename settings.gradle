@@ -1,1 +1,1 @@
-include ':KitKatEmoji', ':kitkatemojiexample'
+include ':entry', ':kitkatemoji'
